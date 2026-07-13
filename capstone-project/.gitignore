@@ -1,0 +1,23 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.ipynb_checkpoints/
+.venv/
+venv/
+
+# Data (opsional - besar, bisa di-generate ulang dari script)
+# data/raw/*.tsv
+
+# Model artifacts besar (opsional untuk repo publik, sesuaikan kebutuhan)
+# models/*.pkl
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Streamlit
+.streamlit/secrets.toml
+
+# Jupyter
+*.log

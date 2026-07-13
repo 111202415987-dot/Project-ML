@@ -1,0 +1,4 @@
+Model,Best Params,Accuracy,Precision,Recall,F1-Score,ROC-AUC
+SVM,{'C': 10},0.9768,0.928,0.8855,0.9062,0.9904
+Random Forest,"{'max_depth': 30, 'n_estimators': 400}",0.9768,0.982,0.8321,0.9008,0.9888
+Naive Bayes,{'alpha': 0.1},0.9739,0.9333,0.855,0.8924,0.9859
