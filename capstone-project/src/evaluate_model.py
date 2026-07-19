@@ -28,6 +28,12 @@ FIG_DIR = os.path.join(REPORTS_DIR, "figures")
 def load_artifacts():
     tfidf = joblib.load(os.path.join(MODELS_DIR, "preprocessing.pkl"))
     all_models = joblib.load(os.path.join(MODELS_DIR, "all_models.pkl"))
+    
+    # Fix compatibility issues with models trained on older scikit-learn versions
+    for name, model in all_models.items():
+        if hasattr(model, "probability") and not hasattr(model, "_effective_probability"):
+            model._effective_probability = model.probability
+            
     with open(os.path.join(MODELS_DIR, "model_meta.json")) as f:
         meta = json.load(f)
     test = pd.read_csv(os.path.join(PROCESSED_DIR, "test.csv"))
