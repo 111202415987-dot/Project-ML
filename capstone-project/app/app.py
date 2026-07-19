@@ -102,7 +102,7 @@ page = st.sidebar.radio("Navigasi", PAGES, label_visibility="collapsed")
 
 st.sidebar.markdown("---")
 st.sidebar.markdown(
-    "**Disusun oleh:**\n\nVasya Citra Narindra\n\nNIM: A11.2024.15987\n\nKelompok: A11.4501-45XX"
+    "**Disusun oleh:**\n\nVasya Citra Narindra\n\nNIM: A11.2024.15987\n\nKelompok: A11.4404"
 )
 
 # ================================================================================
