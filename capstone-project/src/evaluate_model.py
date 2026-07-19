@@ -59,7 +59,7 @@ def plot_roc_curves(all_models, tfidf, test, save_path):
     y_test = test["label_num"]
 
     plt.figure(figsize=(7, 6))
-    colors = {"Naive Bayes": "#4C72B0", "SVM": "#55A868", "Random Forest": "#C44E52"}
+    colors = {"Naive Bayes": "#4C72B0", "SVM": "#55A868", "Random Forest": "#C44E52", "XGBoost": "#8172B2"}
     for name, model in all_models.items():
         proba = model.predict_proba(X_test)[:, 1]
         fpr, tpr, _ = roc_curve(y_test, proba)
@@ -80,7 +80,7 @@ def plot_confusion_matrices(all_models, tfidf, test, save_path):
     y_test = test["label_num"]
 
     fig, axes = plt.subplots(1, len(all_models), figsize=(6 * len(all_models), 5))
-    cmaps = ["Blues", "Greens", "Oranges"]
+    cmaps = ["Blues", "Greens", "Oranges", "Purples"]
     for ax, (name, model), cmap in zip(axes, all_models.items(), cmaps):
         pred = model.predict(X_test)
         cm = confusion_matrix(y_test, pred)

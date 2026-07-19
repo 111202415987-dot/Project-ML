@@ -20,6 +20,7 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.naive_bayes import MultinomialNB
 from sklearn.svm import SVC
 from sklearn.ensemble import RandomForestClassifier
+from xgboost import XGBClassifier
 from sklearn.model_selection import GridSearchCV
 from sklearn.metrics import (
     accuracy_score, precision_score, recall_score, f1_score,
@@ -49,20 +50,32 @@ def build_tfidf(train, val, test):
     return tfidf, X_train, X_val, X_test
 
 
-MODEL_GRID = {
-    "Naive Bayes": {
-        "estimator": MultinomialNB(),
-        "params": {"alpha": [0.1, 0.5, 1.0, 1.5]},
-    },
-    "SVM": {
-        "estimator": SVC(kernel="linear", class_weight="balanced", probability=True, random_state=42),
-        "params": {"C": [0.1, 1, 10]},
-    },
-    "Random Forest": {
-        "estimator": RandomForestClassifier(class_weight="balanced", random_state=42),
-        "params": {"n_estimators": [200, 400], "max_depth": [None, 30]},
-    },
-}
+def get_model_grid(scale_pos_weight=1.0):
+    return {
+        "Naive Bayes": {
+            "estimator": MultinomialNB(),
+            "params": {"alpha": [0.1, 0.5, 1.0, 1.5]},
+        },
+        "SVM": {
+            "estimator": SVC(kernel="linear", class_weight="balanced", probability=True, random_state=42),
+            "params": {"C": [0.1, 1, 10]},
+        },
+        "Random Forest": {
+            "estimator": RandomForestClassifier(class_weight="balanced", random_state=42),
+            "params": {"n_estimators": [200, 400], "max_depth": [None, 30]},
+        },
+        "XGBoost": {
+            "estimator": XGBClassifier(
+                scale_pos_weight=scale_pos_weight, eval_metric="logloss",
+                random_state=42, n_jobs=-1,
+            ),
+            "params": {
+                "n_estimators": [200, 400],
+                "max_depth": [3, 6],
+                "learning_rate": [0.05, 0.1],
+            },
+        },
+    }
 
 
 def evaluate(model, X, y):
@@ -91,10 +104,14 @@ def run_training():
     tfidf, X_train, X_val, X_test = build_tfidf(train, val, test)
     y_train, y_val, y_test = train["label_num"], val["label_num"], test["label_num"]
 
+    scale_pos_weight = (y_train == 0).sum() / (y_train == 1).sum()
+    model_grid = get_model_grid(scale_pos_weight=scale_pos_weight)
+    print(f"scale_pos_weight (XGBoost) = {scale_pos_weight:.3f}")
+
     results = {}
     fitted_models = {}
 
-    for name, cfg in MODEL_GRID.items():
+    for name, cfg in model_grid.items():
         print(f"\n=== Tuning {name} ===")
         grid = GridSearchCV(cfg["estimator"], cfg["params"], scoring="f1", cv=5, n_jobs=-1)
         grid.fit(X_train, y_train)

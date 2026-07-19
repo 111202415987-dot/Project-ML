@@ -96,7 +96,7 @@ page = st.sidebar.radio("Navigasi", PAGES, label_visibility="collapsed")
 
 st.sidebar.markdown("---")
 st.sidebar.markdown(
-    "**Disusun oleh:**\n\nVasya Citra Narindra\n\nNIM: A11.2024.15987\n\nKelompok: A11.4404"
+    "**Disusun oleh:**\n\nVasya Citra Narindra\n\nNIM: A11.2024.15987\n\nKelompok: A11.4501-45XX"
 )
 
 # ================================================================================
@@ -333,7 +333,7 @@ mulai dari akuisisi data, EDA, pemodelan, hingga deployment.
 2. **EDA & Preprocessing** — analisis kualitas data, feature engineering, text cleaning
    (case folding, cleaning, tokenizing, stopword removal, stemming), data splitting (train/val/test).
 3. **Feature Extraction** — TF-IDF Vectorizer (6.000 fitur maksimum).
-4. **Modeling & Tuning** — 3 algoritma (Naive Bayes, SVM, Random Forest) dituning dengan `GridSearchCV`
+4. **Modeling & Tuning** — 4 algoritma (Naive Bayes, SVM, Random Forest, XGBoost) dituning dengan `GridSearchCV`
    (scoring F1, 5-fold CV).
 5. **Evaluasi** — Accuracy, Precision, Recall, F1-Score, ROC-AUC, Confusion Matrix.
 6. **Interpretasi** — SHAP untuk mengetahui fitur/kata paling berpengaruh.
@@ -361,7 +361,7 @@ capstone-project/
 ```
 
 ## Tim Penyusun
-**Vasya Citra Narindra** — NIM A11.2024.15987 — Kelompok A11.4501-45XX
+**Vasya Citra Narindra** — NIM A11.2024.15987 — Kelompok A11.4404
 Mata Kuliah Pembelajaran Mesin, Fakultas Ilmu Komputer, Universitas Dian Nuswantoro.
         """
     )

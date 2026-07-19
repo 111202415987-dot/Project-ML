@@ -23,6 +23,7 @@ interpretasi model menggunakan SHAP.
 | **SVM (terpilih)** | 0.9768 | 0.9280 | 0.8855 | **0.9062** | 0.9904 |
 | Random Forest | 0.9768 | 0.9820 | 0.8321 | 0.9008 | 0.9888 |
 | Naive Bayes | 0.9739 | 0.9333 | 0.8550 | 0.8924 | 0.9859 |
+| XGBoost | 0.9700 | 0.8968 | 0.8626 | 0.8794 | 0.9815 |
 
 > Model terbaik dipilih berdasarkan **F1-Score kelas Spam** pada data uji, karena dataset bersifat
 > *imbalanced* (±87% ham vs ±13% spam).
@@ -35,8 +36,9 @@ capstone-project/
 │   ├── raw/                  # Data mentah (spam.csv)
 │   └── processed/            # Data hasil cleaning & split (train/val/test)
 ├── notebooks/
-│   ├── 01_eda.ipynb          # EDA, preprocessing, feature engineering
-│   └── 02_modeling.ipynb     # Modeling, tuning, evaluasi, SHAP
+│   ├── 01_eda.ipynb           # EDA, preprocessing, feature engineering, analisis outlier
+│   ├── 02_modeling.ipynb      # Modeling, tuning, evaluasi (4 model)
+│   └── 03_interpretation.ipynb # Interpretasi model dengan SHAP
 ├── src/
 │   ├── utils.py               # Fungsi preprocessing teks bersama
 │   ├── data_preprocessing.py  # Pipeline cleaning & split data
@@ -92,7 +94,7 @@ Aplikasi akan terbuka di `http://localhost:8501` dengan 5 menu:
 - **Bahasa:** Python 3.12
 - **Data Manipulation:** Pandas, NumPy
 - **Visualization:** Matplotlib, Seaborn, Plotly
-- **Machine Learning:** Scikit-learn
+- **Machine Learning:** Scikit-learn (Naive Bayes, SVM, Random Forest), XGBoost
 - **Model Interpretation:** SHAP
 - **Deployment:** Streamlit, Joblib
 
